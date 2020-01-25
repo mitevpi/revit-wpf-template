@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Revit Template Application</Name>
+    <Assembly>RevitTemplate.dll</Assembly>
+    <AddInId>604b1052-f742-4127-8576-c821d1193102</AddInId>
+    <FullClassName>RevitTemplate.App</FullClassName>
+    <VendorId>Petr Mitev</VendorId>
+    <VendorDescription>https://github.com/mitevpi</VendorDescription>
+  </AddIn>
+</RevitAddIns>

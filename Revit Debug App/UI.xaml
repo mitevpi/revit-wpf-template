@@ -1,0 +1,222 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" x:Class="RevitTemplate.Ui"
+    mc:Ignorable="d"
+    Title="Debug Utility" Height="354.083" Width="621.47" WindowStartupLocation="CenterScreen" Background="White"
+    Foreground="Gray" FontSize="12"
+    Name="DebugUtility" Icon="Resources/revit-wire.ico">
+    <!--Closing="Window_Closing"-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="152*" />
+            <RowDefinition Height="169*" />
+        </Grid.RowDefinitions>
+
+        <!-- MAIN TAB CONTROLS-->
+        <Border BorderBrush="#FFACACAC" BorderThickness="1" Height="32" VerticalAlignment="Top" Margin="0,0,0.333,0" />
+
+        <!-- MAIN TAB CONTROLS-->
+        <TabControl Margin="228,37,29,25" Grid.Row="0" Grid.RowSpan="2">
+            <TabItem x:Name="TabDebug" Padding="5,0,5,0">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/code.png" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Height="10" />
+                        <Label Content="Debug" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" BorderThickness="0" BorderBrush="{x:Null}">
+                        <TextBox x:Name="TbDebug" FontFamily="Consolas" Margin="0" TextWrapping="Wrap" Text=""
+                                 BorderThickness="0" BorderBrush="{x:Null}" />
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TabCode" Padding="5,0,5,0">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/terminal.png" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Height="10" />
+                        <Label Content="Code" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" BorderThickness="0" BorderBrush="{x:Null}">
+                        <TextBox x:Name="TbCode" FontFamily="Consolas" Margin="0" TextWrapping="Wrap" Text=""
+                                 BorderThickness="0" BorderBrush="{x:Null}" />
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TabTest" Padding="5,0,5,0">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/cloud-small.png" VerticalAlignment="Center"
+                               HorizontalAlignment="Center" Height="10" />
+                        <Label Content="Data" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Label Content="Main Database" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
+                           Width="81" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="121,14,0,0" />
+                    <TextBox x:Name="TbDatabaseMain" HorizontalAlignment="Left" Height="21" Margin="11,16,0,0"
+                             TextWrapping="Wrap" Text="ProjectStats" VerticalAlignment="Top" Width="105" />
+                    <Label Content="Project Collection" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
+                           Width="97" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="121,40,0,0" />
+                    <TextBox x:Name="TbCollectionProject" HorizontalAlignment="Left" Height="21" Margin="11,42,0,0"
+                             TextWrapping="Wrap" Text="RevitData" VerticalAlignment="Top" Width="105" />
+                    <Label Content="Family Collection" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
+                           Width="97" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="121,66,0,0" />
+                    <TextBox x:Name="TbCollectionFamily" HorizontalAlignment="Left" Height="21" Margin="11,68,0,0"
+                             TextWrapping="Wrap" Text="FamilyData" VerticalAlignment="Top" Width="105" />
+                    <Label Content="Sheet Collection" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
+                           Width="97" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="121,92,0,0" />
+                    <TextBox x:Name="TbCollectionSheet" HorizontalAlignment="Left" Height="21" Margin="11,94,0,0"
+                             TextWrapping="Wrap" Text="SheetData" VerticalAlignment="Top" Width="105" />
+                    <Label Content="ML Database" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
+                           Width="81" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="333,14,0,0" />
+                    <TextBox x:Name="TbDatabaseMl" HorizontalAlignment="Left" Height="21" Margin="223,16,0,0"
+                             TextWrapping="Wrap" Text="MLData" VerticalAlignment="Top" Width="105" />
+                    <Label Content="Drawing Collection" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
+                           Width="97" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="333,40,0,0" />
+                    <TextBox x:Name="TbCollectionMlDrawing" HorizontalAlignment="Left" Height="21" Margin="223,42,0,0"
+                             TextWrapping="Wrap" Text="Quarry" VerticalAlignment="Top" Width="105" />
+                    <Label Content="Sheet Collection" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
+                           Width="97" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="121,118,0,0" />
+                    <TextBox x:Name="TbCollectionViewport" HorizontalAlignment="Left" Height="21" Margin="11,120,0,0"
+                             TextWrapping="Wrap" Text="ViewportData" VerticalAlignment="Top" Width="105" />
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TabWip" Padding="5,0,5,0">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/flask.png" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Height="10" />
+                        <Label Content="WIP" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid />
+            </TabItem>
+        </TabControl>
+        <TabControl HorizontalAlignment="Left" Width="209" BorderBrush="{x:Null}" Background="{x:Null}"
+                    Grid.RowSpan="2" Margin="0,0,0,25">
+            <TabItem x:Name="TbTest" BorderBrush="{x:Null}" Background="{x:Null}" Margin="-2,-2,2,-2.667"
+                     HorizontalAlignment="Right" Width="58" Padding="5,0,5,0">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/stethoscope.png" VerticalAlignment="Center"
+                               HorizontalAlignment="Center" Height="10" />
+                        <Label Content="Test" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid >
+                    <Button x:Name="BTest" BorderBrush="#FFABADB3" Background="{x:Null}" Padding="5,0,5,0"
+                        Click="bTest_Click" HorizontalAlignment="Left" Width="183" Height="25"
+                        VerticalAlignment="Top" Margin="10,10,0,0">
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock><Run Text="Simple sample method to test."/></TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="External Method + String Arg" Margin="5,0,0,0" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TbExport" BorderBrush="{x:Null}" Background="{x:Null}" Margin="-3,-2,-1,-2"
+                     Padding="5,0,5,0">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/chevron-right.png" VerticalAlignment="Center"
+                               HorizontalAlignment="Center" Height="10" />
+                        <Label Content="Export" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32*" />
+                        <ColumnDefinition Width="171*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="BExternalMethod1" BorderBrush="#FFABADB3" Background="{x:Null}" Padding="5,0,5,0"
+                            Click="BExternalMethod1_Click" HorizontalAlignment="Left" Width="183" Height="26"
+                            VerticalAlignment="Top" Margin="11,40,0,0" Grid.ColumnSpan="2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="External Method + WPF Arg" Margin="5,0,0,0" />
+                        </StackPanel>
+                    </Button>
+                    <CheckBox x:Name="CbDocumentData" Content="Project" HorizontalAlignment="Left" Margin="9,10,0,0"
+                              VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                    <CheckBox x:Name="CbWallData" Content="Walls" HorizontalAlignment="Left" Margin="47,10,0,0"
+                              VerticalAlignment="Top" Grid.Column="1" />
+                    <CheckBox x:Name="CbSheetData" Content="Sheet" HorizontalAlignment="Left" Margin="111,10,0,0"
+                              VerticalAlignment="Top" Grid.Column="1" />
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TbProjects" BorderBrush="{x:Null}" Background="{x:Null}" Margin="0,-2,-4,-2"
+                     Padding="5,0,5,0">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/building.png" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Height="10" />
+                        <Label Content="Project" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Button x:Name="NonExternal1" BorderBrush="#FFABADB3" Background="{x:Null}" Padding="5,0,5,0"
+                            Click="BNonExternal1_Click" HorizontalAlignment="Left" Width="183" Height="25"
+                            VerticalAlignment="Top" Margin="10,10,0,0" Grid.ColumnSpan="2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Method A" Margin="5,0,0,0" />
+                        </StackPanel>
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
+                                    <TextBlock>Export a CSV to the desktop of Curtain Panels and their areas.</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button x:Name="BNonExternal2" BorderBrush="#FFABADB3" Background="{x:Null}"
+                            Padding="5,0,5,0" Click="BNonExternal2_Click" HorizontalAlignment="Left"
+                            Width="183" Height="25" VerticalAlignment="Top" Margin="10,40,0,0" Grid.ColumnSpan="2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Method B" Margin="5,0,0,0" />
+                        </StackPanel>
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock>Export a CSV to the desktop of joints between Curtain Panels.</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                    <Label Content="Non-External Methods" HorizontalAlignment="Left" Height="22" Margin="11,98,0,0"
+                           VerticalAlignment="Top" Width="182" FontSize="10" Background="{x:Null}" Foreground="Gray"
+                           Grid.ColumnSpan="2" />
+                    <Button x:Name="BNonExternal3" BorderBrush="#FFABADB3" Background="{x:Null}" Padding="5,0,5,0"
+                            Click="BNonExternal3_Click" HorizontalAlignment="Left" Width="183" Height="25"
+                            VerticalAlignment="Top" Margin="10,70,0,0" Grid.ColumnSpan="2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Method C" Margin="5,0,0,0" />
+                        </StackPanel>
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock>Export a CSV to the desktop of neighbor relationships between Curtain Panels.</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+
+
+    </Grid>
+</Window>
