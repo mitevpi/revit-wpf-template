@@ -1,4 +1,4 @@
-Copyright (c) 2019 Petar Mitev - All Rights Reserved
+Copyright (c) 2020 Petar Mitev - All Rights Reserved
 
 Unauthorized copying of this file, project, or any associated files, via any medium is strictly prohibited.
 Proprietary and confidential.

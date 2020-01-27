@@ -18,8 +18,8 @@
     <HtmlHelpName>Revit WPF Template Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Revit Debug App\bin\Debug\RevitTemplate.dll" />
-<DocumentationSource sourceFile="..\Revit Debug App\bin\Debug\RevitTemplate.xml" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\Revit Template\bin\Debug\RevitTemplate.dll" />
+<DocumentationSource sourceFile="..\Revit Template\bin\Debug\RevitTemplate.xml" /></DocumentationSources>
     <HelpFileFormat>HtmlHelp1, MSHelpViewer, Website</HelpFileFormat>
     <SyntaxFilters>Standard</SyntaxFilters>
     <PresentationStyle>VS2013</PresentationStyle>

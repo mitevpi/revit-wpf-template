@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
