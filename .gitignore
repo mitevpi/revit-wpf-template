@@ -9,6 +9,16 @@
 *.userosscache
 *.sln.docstates
 
+# docs
+
+docs/Help/fti
+docs/Help/html
+docs/Help/icons
+docs/Help/scripts
+docs/Help/styles
+docs/Help/toc
+docs/Help/*.php
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
