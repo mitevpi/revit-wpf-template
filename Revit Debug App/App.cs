@@ -1,16 +1,16 @@
-﻿#region Namespaces
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 
-#endregion
-
 namespace RevitTemplate
 {
+    /// <summary>
+    /// This is the main class which defines the Application, and inherits from Revit's
+    /// IExternalApplication class.
+    /// </summary>
     class App : IExternalApplication
     {
         // class instance
@@ -29,26 +29,39 @@ namespace RevitTemplate
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
             PushButton button =
                 panel.AddItem(
-                        new PushButtonData("Revit Template", "Revit Template", thisAssemblyPath, "RevitTemplate.EntryCommand")) as
+                        new PushButtonData("Revit Template", "Revit Template", thisAssemblyPath,
+                            "RevitTemplate.EntryCommand")) as
                     PushButton;
 
+            // defines the tooltip displayed when the button is hovered over in Revit's ribbon
             button.ToolTip = "Visual interface for debugging applications.";
+
+            // defines the icon for the button in Revit's ribbon - note the string formatting
             Uri uriImage = new Uri("pack://application:,,,/RevitTemplate;component/Resources/code-small.png");
             BitmapImage largeImage = new BitmapImage(uriImage);
             button.LargeImage = largeImage;
 
+            // listeners/watchers for external events (if you choose to use them)
             a.ApplicationClosing += a_ApplicationClosing; //Set Application to Idling
             a.Idling += a_Idling;
 
             return Result.Succeeded;
         }
 
+        /// <summary>
+        /// What to do when the application is shut down.
+        /// </summary>
         public Result OnShutdown(UIControlledApplication a)
         {
             return Result.Succeeded;
         }
 
-        //   The external command invokes this on the end-user's request
+        /// <summary>
+        /// This is the method which launches the WPF window, and injects any methods that are
+        /// wrapped by ExternalEventHandlers. This can be done in a number of different ways, and
+        /// implementation will differ based on how the WPF is set up.
+        /// </summary>
+        /// <param name="uiapp">The Revit UIApplication within the add-in will operate.</param>
         public void ShowForm(UIApplication uiapp)
         {
             // If we do not have a dialog yet, create and show it
@@ -66,16 +79,19 @@ namespace RevitTemplate
 
         #region Idling & Closing
 
-        //*****************************a_Idling()*****************************
+
+        /// <summary>
+        /// What to do when the application is idling. (Ideally nothing)
+        /// </summary>
         void a_Idling(object sender, Autodesk.Revit.UI.Events.IdlingEventArgs e)
         {
         }
 
-        //*****************************a_ApplicationClosing()*****************************
+        /// <summary>
+        /// What to do when the application is closing.)
+        /// </summary>
         void a_ApplicationClosing(object sender, Autodesk.Revit.UI.Events.ApplicationClosingEventArgs e)
         {
-            //System.Windows.Application.Current.Shutdown();
-            //System.Environment.Exit(1);
         }
 
         #endregion
@@ -125,8 +141,17 @@ namespace RevitTemplate
 
     #region Method-Specific External Events
 
+    /// <summary>
+    /// This is an example of of wrapping a method with an ExternalEventHandler using a string argument.
+    /// Any type of argument can be passed to the RevitEventWrapper, and therefore be used in the execution
+    /// of a method which has to take place within a "Valid Revit API Context".
+    /// </summary>
     public class EventHandlerWithStringArg : RevitEventWrapper<string>
     {
+        /// <summary>
+        /// The Execute override void must be present in all methods wrapped by the RevitEventWrapper.
+        /// This defines what the method will do when raised externally.
+        /// </summary>
         public override void Execute(UIApplication uiApp, string args)
         {
             // Do your processing here with "args"
@@ -134,8 +159,20 @@ namespace RevitTemplate
         }
     }
 
+    /// <summary>
+    /// This is an example of of wrapping a method with an ExternalEventHandler using an instance of WPF
+    /// as an argument. Any type of argument can be passed to the RevitEventWrapper, and therefore be used in
+    /// the execution of a method which has to take place within a "Valid Revit API Context". This specific
+    /// pattern can be useful for smaller applications, where it is convenient to access the WPF properties
+    /// directly, but can become cumbersome in larger application architectures. At that point, it is suggested
+    /// to use more "low-level" wrapping, as with the string-argument-wrapped method above.
+    /// </summary>
     public class EventHandlerWithWpfArg : RevitEventWrapper<Ui>
     {
+        /// <summary>
+        /// The Execute override void must be present in all methods wrapped by the RevitEventWrapper.
+        /// This defines what the method will do when raised externally.
+        /// </summary>
         public override void Execute(UIApplication uiApp, Ui ui)
         {
             // SETUP
@@ -150,10 +187,13 @@ namespace RevitTemplate
 
             if (ui.CbSheetData.IsChecked == true)
             {
-                Methods.SheetTakeoff(ui, doc);
+                Methods.SheetRename(ui, doc);
             }
 
-            Methods.WallInfo(ui, doc);
+            if (ui.CbWallData.IsChecked == true)
+            {
+                Methods.WallInfo(ui, doc);
+            }
         }
     }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Autodesk.Revit.DB;
 
 namespace RevitTemplate
@@ -14,7 +13,15 @@ namespace RevitTemplate
     internal class Methods
     {
 
-        public static void SheetTakeoff(Ui ui, Document doc)
+        /// <summary>
+        /// Rename all the sheets in the project. This opens a transaction, and it MUST be executed
+        /// in a "Valid Revit API Context", otherwise the add-in will crash. Because of this, we must
+        /// wrap it in a ExternalEventHandler, as we do in the App.cs file in this template.
+        /// </summary>
+        /// <param name="ui">An instance of our UI class, which in this template is the main WPF
+        /// window of the application.</param>
+        /// <param name="doc">The Revit Document to rename sheets in.</param>
+        public static void SheetRename(Ui ui, Document doc)
         {
             // get sheets
             ICollection<ViewSheet> sheets = new FilteredElementCollector(doc)
@@ -25,18 +32,20 @@ namespace RevitTemplate
             string message = $"There are {sheets.Count} Sheets in the project";
             ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + message;
 
-            // delete all the sheets
-            using (Transaction t = new Transaction(doc, "Delete Sheets"))
+            // rename all the sheets
+            // first open a transaction
+            using (Transaction t = new Transaction(doc, "Rename Sheets"))
             {
-                t.Start("Delete Area Lines");
+                // start a transaction within the valid Revit API context
+                t.Start("Rename Sheets");
 
+                // loop over the collection of sheets
                 foreach (ViewSheet sheet in sheets)
                 {
-                    // delete the sheet and tell the user
-                    // doc.Delete(sheet.Id);
-                    sheet.LookupParameter("Sheet Name").SetValueString("TEST");
-                    string deletedMessage = $"Deleted Sheet: {sheet.Title}";
-                    ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + deletedMessage;
+                    // rename the sheets
+                    bool? renamed = sheet.LookupParameter("Sheet Name")?.Set("TEST");
+                    string renameMessage = $"Renamed Sheet: {sheet.Title}";
+                    ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + renameMessage;
                 }
 
                 t.Commit();
@@ -44,14 +53,27 @@ namespace RevitTemplate
             }
 
             // report completion
-            ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + "SHEETS HAVE BEEN DELETED";
+            ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + "SHEETS HAVE BEEN RENAMED";
         }
 
+        /// <summary>
+        /// Print the Title of the Revit Document on the main text box of the WPF window of this application.
+        /// </summary>
+        /// <param name="ui">An instance of our UI class, which in this template is the main WPF
+        /// window of the application.</param>
+        /// <param name="doc">The Revit Document to print the Title of.</param>
         public static void DocumentInfo(Ui ui, Document doc)
         {
             ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + doc.Title;
         }
 
+        /// <summary>
+        /// Count the walls in the Revit Document, and print the count
+        /// on the main text box of the WPF window of this application.
+        /// </summary>
+        /// <param name="ui">An instance of our UI class, which in this template is the main WPF
+        /// window of the application.</param>
+        /// <param name="doc">The Revit Document to count the walls of.</param>
         public static void WallInfo(Ui ui, Document doc)
         {
             ICollection<Wall> walls = new FilteredElementCollector(doc)

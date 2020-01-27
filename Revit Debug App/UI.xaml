@@ -4,7 +4,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" x:Class="RevitTemplate.Ui"
     mc:Ignorable="d"
-    Title="Debug Utility" Height="354.083" Width="621.47" WindowStartupLocation="CenterScreen" Background="White"
+    Title="Template Application" Height="354.083" Width="621.47" WindowStartupLocation="CenterScreen" Background="White"
     Foreground="Gray" FontSize="12"
     Name="DebugUtility" Icon="Resources/revit-wire.ico">
     <!--Closing="Window_Closing"-->
