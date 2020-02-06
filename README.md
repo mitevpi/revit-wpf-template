@@ -12,7 +12,7 @@ WPF Template for Revit Add-Ins including wrapped external methods for execution 
 ### Build
 
 1. Clone/download this repository and open the `.sln` at the root of the repository with Microsoft Visual Studio.
-2. `Install-Package DynamicLanguageRuntime -Version 1.2.2`
+2. `Install-Package DynamicLanguageRuntime -Version 1.1.0`
 3. Re-link references to `RevitAPI.dll` and `RevitAPIUI.dll` and any others which may be missing. 
 4. Build the solution - Building the solution will automatically create and copy the add-in files to the folder for Revit 2019.
 5. Open Revit - Upon opening Revit 2019, there should be a tab called "Template" in Revit, with a button to launch the WPF add-in.
