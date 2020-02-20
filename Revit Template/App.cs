@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.UI;
+using System.Windows.Threading;
 
 namespace RevitTemplate
 {
@@ -17,6 +18,9 @@ namespace RevitTemplate
 
         // ModelessForm instance
         private Ui _mMyForm;
+        
+        // Separate thread to run Ui on
+        private Thread _UiThread;
 
         public Result OnStartup(UIControlledApplication a)
         {
@@ -73,6 +77,40 @@ namespace RevitTemplate
                 // The dialog becomes the owner responsible for disposing the objects given to it.
                 _mMyForm = new Ui(uiapp, evStr, eDatabaseStore);
                 _mMyForm.Show();
+            }
+        }
+        
+        /// <summary>
+        /// This is the method which launches the WPF window in a separate thread, and injects any methods that are
+        /// wrapped by ExternalEventHandlers. This can be done in a number of different ways, and
+        /// implementation will differ based on how the WPF is set up.
+        /// </summary>
+        /// <param name="uiapp">The Revit UIApplication within the add-in will operate.</param>
+        public void ShowFormSeparateThread(UIApplication uiapp)
+        {
+            // If we do not have a thread started or has been terminated start a new one
+            if ( _UiThread is null || !_UiThread.IsAlive )
+            {
+
+                //EXTERNAL EVENTS WITH ARGUMENTS
+                EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
+                EventHandlerWithWpfArg eDatabaseStore = new EventHandlerWithWpfArg();
+
+                _UiThread = new Thread(new ThreadStart(() =>
+                {
+                    SynchronizationContext.SetSynchronizationContext(
+                        new DispatcherSynchronizationContext(
+                            Dispatcher.CurrentDispatcher));
+                    // The dialog becomes the owner responsible for disposing the objects given to it.
+                    _mMyForm = new Ui(uiapp, evStr, eDatabaseStore);
+                    _mMyForm.Closed += (s, e) => Dispatcher.CurrentDispatcher.InvokeShutdown();
+                    _mMyForm.Show();
+                    Dispatcher.Run();
+                }));
+
+                _UiThread.SetApartmentState(ApartmentState.STA);
+                _UiThread.IsBackground = true;
+                _UiThread.Start();
             }
         }
 
