@@ -67,11 +67,11 @@ namespace RevitTemplate
             if (_mMyForm == null || _mMyForm != null) // || m_MyForm.IsDisposed
             {
                 //EXTERNAL EVENTS WITH ARGUMENTS
-                EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
-                EventHandlerWithWpfArg eDatabaseStore = new EventHandlerWithWpfArg();
+                EventHandlerWithStringArg evString = new EventHandlerWithStringArg();
+                EventHandlerWithWpfArg evWpf = new EventHandlerWithWpfArg();
 
                 // The dialog becomes the owner responsible for disposing the objects given to it.
-                _mMyForm = new Ui(uiapp, evStr, eDatabaseStore);
+                _mMyForm = new Ui(uiapp, evString, evWpf);
                 _mMyForm.Show();
             }
         }

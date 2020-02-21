@@ -176,7 +176,7 @@
                             <ToolTip>
                                 <StackPanel>
                                     <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
-                                    <TextBlock>Export a CSV to the desktop of Curtain Panels and their areas.</TextBlock>
+                                    <TextBlock>Tooltip Placeholder</TextBlock>
                                 </StackPanel>
                             </ToolTip>
                         </Button.ToolTip>
@@ -190,7 +190,7 @@
                         <Button.ToolTip>
                             <ToolTip>
                                 <StackPanel>
-                                    <TextBlock>Export a CSV to the desktop of joints between Curtain Panels.</TextBlock>
+                                    <TextBlock>Tooltip Placeholder</TextBlock>
                                 </StackPanel>
                             </ToolTip>
                         </Button.ToolTip>
@@ -207,7 +207,7 @@
                         <Button.ToolTip>
                             <ToolTip>
                                 <StackPanel>
-                                    <TextBlock>Export a CSV to the desktop of neighbor relationships between Curtain Panels.</TextBlock>
+                                    <TextBlock>Tooltip Placeholder</TextBlock>
                                 </StackPanel>
                             </ToolTip>
                         </Button.ToolTip>
