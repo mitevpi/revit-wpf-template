@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.UI;
 using System.Windows.Threading;
+using System.Threading;
 
 namespace RevitTemplate
 {
@@ -18,7 +19,7 @@ namespace RevitTemplate
 
         // ModelessForm instance
         private Ui _mMyForm;
-        
+
         // Separate thread to run Ui on
         private Thread _UiThread;
 
@@ -44,6 +45,18 @@ namespace RevitTemplate
             BitmapImage largeImage = new BitmapImage(uriImage);
             button.LargeImage = largeImage;
 
+            PushButton button2 =
+                panel.AddItem(
+                        new PushButtonData("Revit Template 2", "Revit Template 2", thisAssemblyPath,
+                            "RevitTemplate.EntryCommandSeparateThread")) as
+                    PushButton;
+
+            // defines the tooltip displayed when the button is hovered over in Revit's ribbon
+            button2.ToolTip = "Visual interface for debugging applications.";
+
+            // defines the icon for the button in Revit's ribbon - note the string formatting
+            button2.LargeImage = largeImage;
+
             // listeners/watchers for external events (if you choose to use them)
             a.ApplicationClosing += a_ApplicationClosing; //Set Application to Idling
             a.Idling += a_Idling;
@@ -68,7 +81,7 @@ namespace RevitTemplate
         public void ShowForm(UIApplication uiapp)
         {
             // If we do not have a dialog yet, create and show it
-            if (_mMyForm == null || _mMyForm != null) // || m_MyForm.IsDisposed
+            if ( _mMyForm == null || _mMyForm != null ) // || m_MyForm.IsDisposed
             {
                 //EXTERNAL EVENTS WITH ARGUMENTS
                 EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
@@ -79,7 +92,7 @@ namespace RevitTemplate
                 _mMyForm.Show();
             }
         }
-        
+
         /// <summary>
         /// This is the method which launches the WPF window in a separate thread, and injects any methods that are
         /// wrapped by ExternalEventHandlers. This can be done in a number of different ways, and
@@ -160,9 +173,9 @@ namespace RevitTemplate
 
             // Search existing tab for your panel.
             List<RibbonPanel> panels = a.GetRibbonPanels(tab);
-            foreach (RibbonPanel p in panels)
+            foreach ( RibbonPanel p in panels )
             {
-                if (p.Name == "Develop")
+                if ( p.Name == "Develop" )
                 {
                     ribbonPanel = p;
                 }

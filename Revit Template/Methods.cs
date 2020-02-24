@@ -30,7 +30,8 @@ namespace RevitTemplate
 
             // report the count
             string message = $"There are {sheets.Count} Sheets in the project";
-            ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + message;
+
+            ui.Dispatcher.Invoke(() => ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + message);
 
             // rename all the sheets
             // first open a transaction
@@ -45,7 +46,7 @@ namespace RevitTemplate
                     // rename the sheets
                     bool? renamed = sheet.LookupParameter("Sheet Name")?.Set("TEST");
                     string renameMessage = $"Renamed Sheet: {sheet.Title}";
-                    ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + renameMessage;
+                    ui.Dispatcher.Invoke(() => ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + renameMessage);
                 }
 
                 t.Commit();
@@ -53,7 +54,7 @@ namespace RevitTemplate
             }
 
             // report completion
-            ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + "SHEETS HAVE BEEN RENAMED";
+            ui.Dispatcher.Invoke(() => ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + "SHEETS HAVE BEEN RENAMED");
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace RevitTemplate
         /// <param name="doc">The Revit Document to print the Title of.</param>
         public static void DocumentInfo(Ui ui, Document doc)
         {
-            ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + doc.Title;
+            ui.Dispatcher.Invoke(() => ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + doc.Title);
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace RevitTemplate
 
             string message = $"There are {walls.Count} Walls in the project";
 
-            ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + message;
+            ui.Dispatcher.Invoke(() => ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + message);
         }
 
     }
