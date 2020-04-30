@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Autodesk.Revit.DB;
 
 namespace RevitTemplate
 {
-
     /// <summary>
     /// Create methods here that need to be wrapped in a valid Revit Api context.
     /// Things like transactions modifying Revit Elements, etc.
     /// </summary>
     internal class Methods
     {
-
         /// <summary>
         /// Rename all the sheets in the project. This opens a transaction, and it MUST be executed
         /// in a "Valid Revit API Context", otherwise the add-in will crash. Because of this, we must
@@ -23,18 +22,21 @@ namespace RevitTemplate
         /// <param name="doc">The Revit Document to rename sheets in.</param>
         public static void SheetRename(Ui ui, Document doc)
         {
-            // get sheets
-            ICollection<ViewSheet> sheets = new FilteredElementCollector(doc)
+            ICollection<ViewSheet> sheets = null;
+            sheets = new FilteredElementCollector(doc)
                 .OfClass(typeof(ViewSheet))
-                .Select(p => (ViewSheet)p).ToList();
+                .Select(p => (ViewSheet) p).ToList();
 
-            // report the count
-            string message = $"There are {sheets.Count} Sheets in the project";
+            // get sheets, report results - push the task off to another thread
+            Task.Run(() =>
+            {
+                // report the count
+                string message = $"There are {sheets.Count} Sheets in the project";
+                ui.Dispatcher.Invoke(() =>
+                    ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + message);
+            });
 
-            ui.Dispatcher.Invoke(() => ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + message);
-
-            // rename all the sheets
-            // first open a transaction
+            // rename all the sheets, but first open a transaction
             using (Transaction t = new Transaction(doc, "Rename Sheets"))
             {
                 // start a transaction within the valid Revit API context
@@ -45,16 +47,18 @@ namespace RevitTemplate
                 {
                     // rename the sheets
                     bool? renamed = sheet.LookupParameter("Sheet Name")?.Set("TEST");
-                    string renameMessage = $"Renamed Sheet: {sheet.Title}";
-                    ui.Dispatcher.Invoke(() => ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + renameMessage);
+                    string renameMessage = $"Renamed: {sheet.Title}, Status: {renamed}";
+                    ui.Dispatcher.Invoke(() =>
+                        ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + renameMessage);
                 }
 
                 t.Commit();
                 t.Dispose();
             }
 
-            // report completion
-            ui.Dispatcher.Invoke(() => ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + "SHEETS HAVE BEEN RENAMED");
+            // invoke the UI dispatcher to print the results to report completion
+            ui.Dispatcher.Invoke(() =>
+                ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + "SHEETS HAVE BEEN RENAMED");
         }
 
         /// <summary>
@@ -77,15 +81,20 @@ namespace RevitTemplate
         /// <param name="doc">The Revit Document to count the walls of.</param>
         public static void WallInfo(Ui ui, Document doc)
         {
-            ICollection<Wall> walls = new FilteredElementCollector(doc)
-                .OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElementType()
-                .Select(p => (Wall)p).ToList();
+            Task.Run(() =>
+            {
+                // get all walls in the document
+                ICollection<Wall> walls = new FilteredElementCollector(doc)
+                    .OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElementType()
+                    .Select(p => (Wall) p).ToList();
 
-            string message = $"There are {walls.Count} Walls in the project";
+                // format the message to show the number of walls in the project
+                string message = $"There are {walls.Count} Walls in the project";
 
-            ui.Dispatcher.Invoke(() => ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + message);
+                // invoke the UI dispatcher to print the results to the UI
+                ui.Dispatcher.Invoke(() =>
+                    ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + message);
+            });
         }
-
     }
 }
-

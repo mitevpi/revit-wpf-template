@@ -22,7 +22,7 @@ namespace RevitTemplate
         private Ui _mMyForm;
 
         // Separate thread to run Ui on
-        private Thread _UiThread;
+        private Thread _uiThread;
 
         public Result OnStartup(UIControlledApplication a)
         {
@@ -32,6 +32,8 @@ namespace RevitTemplate
             // Method to add Tab and Panel 
             RibbonPanel panel = RibbonPanel(a);
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
+            
+            // BUTTON FOR THE SINGLE-THREADED WPF OPTION
             PushButton button =
                 panel.AddItem(
                         new PushButtonData("WPF Template", "WPF Template", thisAssemblyPath,
@@ -46,6 +48,7 @@ namespace RevitTemplate
             BitmapImage largeImage = new BitmapImage(uriImage);
             button.LargeImage = largeImage;
 
+            // BUTTON FOR THE MULTI-THREADED WPF OPTION
             PushButton button2 =
                 panel.AddItem(
                         new PushButtonData("WPF Template\nMulti-Thread", "WPF Template\nMulti-Thread", thisAssemblyPath,
@@ -101,12 +104,12 @@ namespace RevitTemplate
         public void ShowFormSeparateThread(UIApplication uiapp)
         {
             // If we do not have a thread started or has been terminated start a new one
-            if (!(_UiThread is null) && _UiThread.IsAlive) return;
+            if (!(_uiThread is null) && _uiThread.IsAlive) return;
             //EXTERNAL EVENTS WITH ARGUMENTS
             EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
             EventHandlerWithWpfArg evWpf = new EventHandlerWithWpfArg();
 
-            _UiThread = new Thread(() =>
+            _uiThread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(
                     new DispatcherSynchronizationContext(
@@ -118,9 +121,9 @@ namespace RevitTemplate
                 Dispatcher.Run();
             });
 
-            _UiThread.SetApartmentState(ApartmentState.STA);
-            _UiThread.IsBackground = true;
-            _UiThread.Start();
+            _uiThread.SetApartmentState(ApartmentState.STA);
+            _uiThread.IsBackground = true;
+            _uiThread.Start();
         }
 
         #region Idling & Closing

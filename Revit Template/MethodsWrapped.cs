@@ -41,27 +41,27 @@ namespace RevitTemplate
             UIDocument uiDoc = uiApp.ActiveUIDocument;
             Document doc = uiDoc.Document;
 
-            bool CbDocumentDataIsChecked = false;
-            ui.Dispatcher.Invoke(() => CbDocumentDataIsChecked = ui.CbDocumentData.IsChecked.GetValueOrDefault());
+            bool cbDocumentDataIsChecked = false;
+            ui.Dispatcher.Invoke(() => cbDocumentDataIsChecked = ui.CbDocumentData.IsChecked.GetValueOrDefault());
 
-            bool CbSheetDataIsChecked = false;
-            ui.Dispatcher.Invoke(() => CbSheetDataIsChecked = ui.CbSheetData.IsChecked.GetValueOrDefault());
+            bool cbSheetDataIsChecked = false;
+            ui.Dispatcher.Invoke(() => cbSheetDataIsChecked = ui.CbSheetData.IsChecked.GetValueOrDefault());
 
-            bool CbWallDataIsChecked = false;
-            ui.Dispatcher.Invoke(() => CbWallDataIsChecked = ui.CbWallData.IsChecked.GetValueOrDefault());
+            bool cbWallDataIsChecked = false;
+            ui.Dispatcher.Invoke(() => cbWallDataIsChecked = ui.CbWallData.IsChecked.GetValueOrDefault());
 
             // METHODS
-            if (CbDocumentDataIsChecked)
+            if (cbDocumentDataIsChecked)
             {
                 Methods.DocumentInfo(ui, doc);
             }
 
-            if (CbSheetDataIsChecked)
+            if (cbSheetDataIsChecked)
             {
                 Methods.SheetRename(ui, doc);
             }
 
-            if (CbWallDataIsChecked)
+            if (cbWallDataIsChecked)
             {
                 Methods.WallInfo(ui, doc);
             }

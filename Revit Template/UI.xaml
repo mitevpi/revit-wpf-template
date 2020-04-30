@@ -74,14 +74,6 @@
                            Width="97" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="121,92,0,0" />
                     <TextBox x:Name="TbCollectionSheet" HorizontalAlignment="Left" Height="21" Margin="11,94,0,0"
                              TextWrapping="Wrap" Text="SheetData" VerticalAlignment="Top" Width="105" />
-                    <Label Content="ML Database" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
-                           Width="81" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="333,14,0,0" />
-                    <TextBox x:Name="TbDatabaseMl" HorizontalAlignment="Left" Height="21" Margin="223,16,0,0"
-                             TextWrapping="Wrap" Text="MLData" VerticalAlignment="Top" Width="105" />
-                    <Label Content="Drawing Collection" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
-                           Width="97" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="333,40,0,0" />
-                    <TextBox x:Name="TbCollectionMlDrawing" HorizontalAlignment="Left" Height="21" Margin="223,42,0,0"
-                             TextWrapping="Wrap" Text="Quarry" VerticalAlignment="Top" Width="105" />
                     <Label Content="Sheet Collection" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top"
                            Width="97" FontSize="10" Background="{x:Null}" Foreground="Gray" Margin="121,118,0,0" />
                     <TextBox x:Name="TbCollectionViewport" HorizontalAlignment="Left" Height="21" Margin="11,120,0,0"
@@ -111,8 +103,8 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid >
-                    <Button x:Name="BTest" BorderBrush="#FFABADB3" Background="{x:Null}" Padding="5,0,5,0"
-                        Click="bTest_Click" HorizontalAlignment="Left" Width="183" Height="25"
+                    <Button x:Name="BExtString" BorderBrush="#FFABADB3" Background="{x:Null}" Padding="5,0,5,0"
+                        Click="BExtString_Click" HorizontalAlignment="Left" Width="183" Height="25"
                         VerticalAlignment="Top" Margin="10,10,0,0">
                         <Button.ToolTip>
                             <ToolTip>
