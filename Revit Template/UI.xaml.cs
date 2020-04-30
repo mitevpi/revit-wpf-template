@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
@@ -13,9 +11,10 @@ namespace RevitTemplate
     public partial class Ui : Window
     {
         private readonly Document _doc;
-        private readonly UIApplication _uiApp;
+
+        //private readonly UIApplication _uiApp;
+        //private readonly Autodesk.Revit.ApplicationServices.Application _app;
         private readonly UIDocument _uiDoc;
-        private readonly Autodesk.Revit.ApplicationServices.Application _app;
 
         private readonly EventHandlerWithStringArg _mExternalMethodStringArg;
         private readonly EventHandlerWithWpfArg _mExternalMethodWpfArg;
@@ -25,7 +24,8 @@ namespace RevitTemplate
         {
             _uiDoc = uiApp.ActiveUIDocument;
             _doc = _uiDoc.Document;
-            _app = _doc.Application;
+            //_app = _doc.Application;
+            //_uiApp = _doc.Application;
             Closed += MainWindow_Closed;
 
             InitializeComponent();

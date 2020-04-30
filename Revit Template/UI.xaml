@@ -92,7 +92,7 @@
             </TabItem>
         </TabControl>
         <TabControl HorizontalAlignment="Left" Width="209" BorderBrush="{x:Null}" Background="{x:Null}"
-                    Grid.RowSpan="2" Margin="0,0,0,25">
+                    Grid.Row="0" Grid.RowSpan="2" Margin="0,0,0,25">
             <TabItem x:Name="TbTest" BorderBrush="{x:Null}" Background="{x:Null}" Margin="-2,-2,2,-2.667"
                      HorizontalAlignment="Right" Width="58" Padding="5,0,5,0">
                 <TabItem.Header>
@@ -141,7 +141,7 @@
                         </StackPanel>
                     </Button>
                     <CheckBox x:Name="CbDocumentData" Content="Project" HorizontalAlignment="Left" Margin="9,10,0,0"
-                              VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                              VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Column="0" />
                     <CheckBox x:Name="CbWallData" Content="Walls" HorizontalAlignment="Left" Margin="47,10,0,0"
                               VerticalAlignment="Top" Grid.Column="1" />
                     <CheckBox x:Name="CbSheetData" Content="Sheet" HorizontalAlignment="Left" Margin="111,10,0,0"

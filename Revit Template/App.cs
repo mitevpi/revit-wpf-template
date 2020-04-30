@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Media.Imaging;
@@ -32,34 +33,31 @@ namespace RevitTemplate
             // Method to add Tab and Panel 
             RibbonPanel panel = RibbonPanel(a);
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
-            
+
             // BUTTON FOR THE SINGLE-THREADED WPF OPTION
-            PushButton button =
-                panel.AddItem(
-                        new PushButtonData("WPF Template", "WPF Template", thisAssemblyPath,
-                            "RevitTemplate.EntryCommand")) as
-                    PushButton;
-
-            // defines the tooltip displayed when the button is hovered over in Revit's ribbon
-            button.ToolTip = "Visual interface for debugging applications.";
-
-            // defines the icon for the button in Revit's ribbon - note the string formatting
-            Uri uriImage = new Uri("pack://application:,,,/RevitTemplate;component/Resources/code-small.png");
-            BitmapImage largeImage = new BitmapImage(uriImage);
-            button.LargeImage = largeImage;
+            if (panel.AddItem(
+                new PushButtonData("WPF Template", "WPF Template", thisAssemblyPath,
+                    "RevitTemplate.EntryCommand")) is PushButton button)
+            {
+                // defines the tooltip displayed when the button is hovered over in Revit's ribbon
+                button.ToolTip = "Visual interface for debugging applications.";
+                // defines the icon for the button in Revit's ribbon - note the string formatting
+                Uri uriImage = new Uri("pack://application:,,,/RevitTemplate;component/Resources/code-small.png");
+                BitmapImage largeImage = new BitmapImage(uriImage);
+                button.LargeImage = largeImage;
+            }
 
             // BUTTON FOR THE MULTI-THREADED WPF OPTION
-            PushButton button2 =
-                panel.AddItem(
-                        new PushButtonData("WPF Template\nMulti-Thread", "WPF Template\nMulti-Thread", thisAssemblyPath,
-                            "RevitTemplate.EntryCommandSeparateThread")) as
-                    PushButton;
+            if (panel.AddItem(
+                new PushButtonData("WPF Template\nMulti-Thread", "WPF Template\nMulti-Thread", thisAssemblyPath,
+                    "RevitTemplate.EntryCommandSeparateThread")) is PushButton button2)
+            {
+                button2.ToolTip = "Visual interface for debugging applications.";
+                Uri uriImage = new Uri("pack://application:,,,/RevitTemplate;component/Resources/code-small.png");
+                BitmapImage largeImage = new BitmapImage(uriImage);
+                button2.LargeImage = largeImage;
+            }
 
-            // defines the tooltip displayed when the button is hovered over in Revit's ribbon
-            button2.ToolTip = "Visual interface for debugging applications.";
-
-            // defines the icon for the button in Revit's ribbon - note the string formatting
-            button2.LargeImage = largeImage;
 
             // listeners/watchers for external events (if you choose to use them)
             a.ApplicationClosing += a_ApplicationClosing; //Set Application to Idling
@@ -156,8 +154,9 @@ namespace RevitTemplate
             {
                 a.CreateRibbonTab(tab);
             }
-            catch
+            catch (Exception ex)
             {
+                Util.HandleError(ex);
             }
 
             // Try to create ribbon panel.
@@ -165,18 +164,16 @@ namespace RevitTemplate
             {
                 RibbonPanel panel = a.CreateRibbonPanel(tab, "Develop");
             }
-            catch
+            catch (Exception ex)
             {
+                Util.HandleError(ex);
             }
 
             // Search existing tab for your panel.
             List<RibbonPanel> panels = a.GetRibbonPanels(tab);
-            foreach (RibbonPanel p in panels)
+            foreach (RibbonPanel p in panels.Where(p => p.Name == "Develop"))
             {
-                if (p.Name == "Develop")
-                {
-                    ribbonPanel = p;
-                }
+                ribbonPanel = p;
             }
 
             //return panel 
