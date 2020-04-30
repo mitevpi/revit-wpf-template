@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Media.Imaging;
@@ -22,7 +23,7 @@ namespace RevitTemplate
         private Ui _mMyForm;
 
         // Separate thread to run Ui on
-        private Thread _UiThread;
+        private Thread _uiThread;
 
         public Result OnStartup(UIControlledApplication a)
         {
@@ -32,31 +33,31 @@ namespace RevitTemplate
             // Method to add Tab and Panel 
             RibbonPanel panel = RibbonPanel(a);
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
-            PushButton button =
-                panel.AddItem(
-                        new PushButtonData("WPF Template", "WPF Template", thisAssemblyPath,
-                            "RevitTemplate.EntryCommand")) as
-                    PushButton;
 
-            // defines the tooltip displayed when the button is hovered over in Revit's ribbon
-            button.ToolTip = "Visual interface for debugging applications.";
+            // BUTTON FOR THE SINGLE-THREADED WPF OPTION
+            if (panel.AddItem(
+                new PushButtonData("WPF Template", "WPF Template", thisAssemblyPath,
+                    "RevitTemplate.EntryCommand")) is PushButton button)
+            {
+                // defines the tooltip displayed when the button is hovered over in Revit's ribbon
+                button.ToolTip = "Visual interface for debugging applications.";
+                // defines the icon for the button in Revit's ribbon - note the string formatting
+                Uri uriImage = new Uri("pack://application:,,,/RevitTemplate;component/Resources/code-small.png");
+                BitmapImage largeImage = new BitmapImage(uriImage);
+                button.LargeImage = largeImage;
+            }
 
-            // defines the icon for the button in Revit's ribbon - note the string formatting
-            Uri uriImage = new Uri("pack://application:,,,/RevitTemplate;component/Resources/code-small.png");
-            BitmapImage largeImage = new BitmapImage(uriImage);
-            button.LargeImage = largeImage;
+            // BUTTON FOR THE MULTI-THREADED WPF OPTION
+            if (panel.AddItem(
+                new PushButtonData("WPF Template\nMulti-Thread", "WPF Template\nMulti-Thread", thisAssemblyPath,
+                    "RevitTemplate.EntryCommandSeparateThread")) is PushButton button2)
+            {
+                button2.ToolTip = "Visual interface for debugging applications.";
+                Uri uriImage = new Uri("pack://application:,,,/RevitTemplate;component/Resources/code-small.png");
+                BitmapImage largeImage = new BitmapImage(uriImage);
+                button2.LargeImage = largeImage;
+            }
 
-            PushButton button2 =
-                panel.AddItem(
-                        new PushButtonData("WPF Template Multi-Thread", "WPF Template Multi-Thread", thisAssemblyPath,
-                            "RevitTemplate.EntryCommandSeparateThread")) as
-                    PushButton;
-
-            // defines the tooltip displayed when the button is hovered over in Revit's ribbon
-            button2.ToolTip = "Visual interface for debugging applications.";
-
-            // defines the icon for the button in Revit's ribbon - note the string formatting
-            button2.LargeImage = largeImage;
 
             // listeners/watchers for external events (if you choose to use them)
             a.ApplicationClosing += a_ApplicationClosing; //Set Application to Idling
@@ -82,16 +83,14 @@ namespace RevitTemplate
         public void ShowForm(UIApplication uiapp)
         {
             // If we do not have a dialog yet, create and show it
-            if (_mMyForm == null || _mMyForm != null) // || m_MyForm.IsDisposed
-            {
-                //EXTERNAL EVENTS WITH ARGUMENTS
-                EventHandlerWithStringArg evString = new EventHandlerWithStringArg();
-                EventHandlerWithWpfArg evWpf = new EventHandlerWithWpfArg();
+            if (_mMyForm != null && _mMyForm == null) return;
+            //EXTERNAL EVENTS WITH ARGUMENTS
+            EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
+            EventHandlerWithWpfArg evWpf = new EventHandlerWithWpfArg();
 
-                // The dialog becomes the owner responsible for disposing the objects given to it.
-                _mMyForm = new Ui(uiapp, evString, evWpf);
-                _mMyForm.Show();
-            }
+            // The dialog becomes the owner responsible for disposing the objects given to it.
+            _mMyForm = new Ui(uiapp, evStr, evWpf);
+            _mMyForm.Show();
         }
 
         /// <summary>
@@ -103,28 +102,26 @@ namespace RevitTemplate
         public void ShowFormSeparateThread(UIApplication uiapp)
         {
             // If we do not have a thread started or has been terminated start a new one
-            if (_UiThread is null || !_UiThread.IsAlive)
+            if (!(_uiThread is null) && _uiThread.IsAlive) return;
+            //EXTERNAL EVENTS WITH ARGUMENTS
+            EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
+            EventHandlerWithWpfArg evWpf = new EventHandlerWithWpfArg();
+
+            _uiThread = new Thread(() =>
             {
-                //EXTERNAL EVENTS WITH ARGUMENTS
-                EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
-                EventHandlerWithWpfArg eDatabaseStore = new EventHandlerWithWpfArg();
+                SynchronizationContext.SetSynchronizationContext(
+                    new DispatcherSynchronizationContext(
+                        Dispatcher.CurrentDispatcher));
+                // The dialog becomes the owner responsible for disposing the objects given to it.
+                _mMyForm = new Ui(uiapp, evStr, evWpf);
+                _mMyForm.Closed += (s, e) => Dispatcher.CurrentDispatcher.InvokeShutdown();
+                _mMyForm.Show();
+                Dispatcher.Run();
+            });
 
-                _UiThread = new Thread(() =>
-                {
-                    SynchronizationContext.SetSynchronizationContext(
-                        new DispatcherSynchronizationContext(
-                            Dispatcher.CurrentDispatcher));
-                    // The dialog becomes the owner responsible for disposing the objects given to it.
-                    _mMyForm = new Ui(uiapp, evStr, eDatabaseStore);
-                    _mMyForm.Closed += (s, e) => Dispatcher.CurrentDispatcher.InvokeShutdown();
-                    _mMyForm.Show();
-                    Dispatcher.Run();
-                });
-
-                _UiThread.SetApartmentState(ApartmentState.STA);
-                _UiThread.IsBackground = true;
-                _UiThread.Start();
-            }
+            _uiThread.SetApartmentState(ApartmentState.STA);
+            _uiThread.IsBackground = true;
+            _uiThread.Start();
         }
 
         #region Idling & Closing
@@ -157,8 +154,9 @@ namespace RevitTemplate
             {
                 a.CreateRibbonTab(tab);
             }
-            catch
+            catch (Exception ex)
             {
+                Util.HandleError(ex);
             }
 
             // Try to create ribbon panel.
@@ -166,18 +164,16 @@ namespace RevitTemplate
             {
                 RibbonPanel panel = a.CreateRibbonPanel(tab, "Develop");
             }
-            catch
+            catch (Exception ex)
             {
+                Util.HandleError(ex);
             }
 
             // Search existing tab for your panel.
             List<RibbonPanel> panels = a.GetRibbonPanels(tab);
-            foreach (RibbonPanel p in panels)
+            foreach (RibbonPanel p in panels.Where(p => p.Name == "Develop"))
             {
-                if (p.Name == "Develop")
-                {
-                    ribbonPanel = p;
-                }
+                ribbonPanel = p;
             }
 
             //return panel 

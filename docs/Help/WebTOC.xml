@@ -1,66 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="cc272b01-6ca5-488a-8cac-78bb5a0ea392" Title="RevitTemplate" Url="html/N_RevitTemplate.htm">
-    <HelpTOCNode Id="325f60cc-bd0a-49d0-8e8a-4de093f82282" Title="EntryCommand Class" Url="html/T_RevitTemplate_EntryCommand.htm">
+  <HelpTOCNode Id="cb64f227-6550-4914-991c-5fe25baa4967" Title="RevitTemplate" Url="html/N_RevitTemplate.htm">
+    <HelpTOCNode Id="5c1e5c59-079d-41ec-8ba4-dad89823bd4b" Title="EntryCommand Class" Url="html/T_RevitTemplate_EntryCommand.htm">
       <HelpTOCNode Title="EntryCommand Constructor " Url="html/M_RevitTemplate_EntryCommand__ctor.htm" />
-      <HelpTOCNode Id="2e4e1e2d-8cde-44e6-bf15-c6fb92c68ae2" Title="EntryCommand Methods" Url="html/Methods_T_RevitTemplate_EntryCommand.htm">
+      <HelpTOCNode Id="021d31e4-b5d6-4a99-8ee7-bff255bdcec8" Title="EntryCommand Methods" Url="html/Methods_T_RevitTemplate_EntryCommand.htm">
         <HelpTOCNode Title="Execute Method " Url="html/M_RevitTemplate_EntryCommand_Execute.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="cd8837aa-e4be-43b7-8e51-892cac0c06eb" Title="EventHandlerWithStringArg Class" Url="html/T_RevitTemplate_EventHandlerWithStringArg.htm">
+    <HelpTOCNode Id="c9009d80-f95a-4c52-96c7-b8e9f72b600c" Title="EntryCommandSeparateThread Class" Url="html/T_RevitTemplate_EntryCommandSeparateThread.htm">
+      <HelpTOCNode Title="EntryCommandSeparateThread Constructor " Url="html/M_RevitTemplate_EntryCommandSeparateThread__ctor.htm" />
+      <HelpTOCNode Id="0e191edf-425b-4114-a633-dea0b48ed465" Title="EntryCommandSeparateThread Methods" Url="html/Methods_T_RevitTemplate_EntryCommandSeparateThread.htm">
+        <HelpTOCNode Title="Execute Method " Url="html/M_RevitTemplate_EntryCommandSeparateThread_Execute.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="72b2827f-26c9-4c38-b85f-4ff69ea3ca40" Title="EventHandlerWithStringArg Class" Url="html/T_RevitTemplate_EventHandlerWithStringArg.htm">
       <HelpTOCNode Title="EventHandlerWithStringArg Constructor " Url="html/M_RevitTemplate_EventHandlerWithStringArg__ctor.htm" />
-      <HelpTOCNode Id="17e419c9-8047-425f-96ab-6acf69495bd0" Title="EventHandlerWithStringArg Methods" Url="html/Methods_T_RevitTemplate_EventHandlerWithStringArg.htm">
-        <HelpTOCNode Id="d5fc38cc-293c-4d7d-a043-3deb46450576" Title="Execute Method " Url="html/Overload_RevitTemplate_EventHandlerWithStringArg_Execute.htm">
+      <HelpTOCNode Id="e35b88dd-6c10-4b7a-967d-6e26b514207c" Title="EventHandlerWithStringArg Methods" Url="html/Methods_T_RevitTemplate_EventHandlerWithStringArg.htm">
+        <HelpTOCNode Id="94ebc351-9319-42e8-b436-4f4d19f153ce" Title="Execute Method " Url="html/Overload_RevitTemplate_EventHandlerWithStringArg_Execute.htm">
           <HelpTOCNode Title="Execute Method (UIApplication, String)" Url="html/M_RevitTemplate_EventHandlerWithStringArg_Execute.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
       <HelpTOCNode Title="EventHandlerWithStringArg Fields" Url="html/Fields_T_RevitTemplate_EventHandlerWithStringArg.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="5f272204-0f9c-4d46-b8c7-68cf21022358" Title="EventHandlerWithWpfArg Class" Url="html/T_RevitTemplate_EventHandlerWithWpfArg.htm">
+    <HelpTOCNode Id="77abf0bc-8e5d-43a2-bbe2-c37c9ee354ad" Title="EventHandlerWithWpfArg Class" Url="html/T_RevitTemplate_EventHandlerWithWpfArg.htm">
       <HelpTOCNode Title="EventHandlerWithWpfArg Constructor " Url="html/M_RevitTemplate_EventHandlerWithWpfArg__ctor.htm" />
-      <HelpTOCNode Id="daa723b5-7ff7-4cff-b173-aae6c3378ced" Title="EventHandlerWithWpfArg Methods" Url="html/Methods_T_RevitTemplate_EventHandlerWithWpfArg.htm">
-        <HelpTOCNode Id="aeeb06de-b243-4d25-af4f-580de1d84978" Title="Execute Method " Url="html/Overload_RevitTemplate_EventHandlerWithWpfArg_Execute.htm">
+      <HelpTOCNode Id="94da3472-55cf-4d00-9c04-a85cd0c4a77a" Title="EventHandlerWithWpfArg Methods" Url="html/Methods_T_RevitTemplate_EventHandlerWithWpfArg.htm">
+        <HelpTOCNode Id="9f38a0f6-771c-4676-a83e-8989adca56b8" Title="Execute Method " Url="html/Overload_RevitTemplate_EventHandlerWithWpfArg_Execute.htm">
           <HelpTOCNode Title="Execute Method (UIApplication, Ui)" Url="html/M_RevitTemplate_EventHandlerWithWpfArg_Execute.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
       <HelpTOCNode Title="EventHandlerWithWpfArg Fields" Url="html/Fields_T_RevitTemplate_EventHandlerWithWpfArg.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="b639958c-4d50-46d0-807c-585377e1917f" Title="RevitEventWrapper(TType) Class" Url="html/T_RevitTemplate_RevitEventWrapper_1.htm">
+    <HelpTOCNode Id="a93ed279-18e0-41b1-9fdc-bdab3605beb7" Title="RevitEventWrapper(TType) Class" Url="html/T_RevitTemplate_RevitEventWrapper_1.htm">
       <HelpTOCNode Title="RevitEventWrapper(TType) Constructor " Url="html/M_RevitTemplate_RevitEventWrapper_1__ctor.htm" />
-      <HelpTOCNode Id="6ba72d8e-84e8-42b1-b242-0651dc3e11ae" Title="RevitEventWrapper(TType) Methods" Url="html/Methods_T_RevitTemplate_RevitEventWrapper_1.htm">
-        <HelpTOCNode Id="bcb96638-af2f-4c0f-9293-60f41a368cf0" Title="Execute Method " Url="html/Overload_RevitTemplate_RevitEventWrapper_1_Execute.htm">
+      <HelpTOCNode Id="d1fa1b86-6129-4f29-8c84-e557b023e45a" Title="RevitEventWrapper(TType) Methods" Url="html/Methods_T_RevitTemplate_RevitEventWrapper_1.htm">
+        <HelpTOCNode Id="c147e6bf-88aa-40f2-a843-582cb578ce7f" Title="Execute Method " Url="html/Overload_RevitTemplate_RevitEventWrapper_1_Execute.htm">
           <HelpTOCNode Title="Execute Method (UIApplication)" Url="html/M_RevitTemplate_RevitEventWrapper_1_Execute.htm" />
           <HelpTOCNode Title="Execute Method (UIApplication, TType)" Url="html/M_RevitTemplate_RevitEventWrapper_1_Execute_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="GetName Method " Url="html/M_RevitTemplate_RevitEventWrapper_1_GetName.htm" />
         <HelpTOCNode Title="Raise Method " Url="html/M_RevitTemplate_RevitEventWrapper_1_Raise.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="00fb83ee-c4d9-4ac9-9299-6b9eef25e7fa" Title="RevitEventWrapper(TType) Fields" Url="html/Fields_T_RevitTemplate_RevitEventWrapper_1.htm">
+      <HelpTOCNode Id="662d7dfe-78d8-4850-8c9a-62174563210c" Title="RevitEventWrapper(TType) Fields" Url="html/Fields_T_RevitTemplate_RevitEventWrapper_1.htm">
         <HelpTOCNode Title="_lock Field" Url="html/F_RevitTemplate_RevitEventWrapper_1__lock.htm" />
         <HelpTOCNode Title="_revitEvent Field" Url="html/F_RevitTemplate_RevitEventWrapper_1__revitEvent.htm" />
         <HelpTOCNode Title="_savedArgs Field" Url="html/F_RevitTemplate_RevitEventWrapper_1__savedArgs.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="f3d94d74-323c-412a-93d4-4c9b21a050d3" Title="Ui Class" Url="html/T_RevitTemplate_Ui.htm">
+    <HelpTOCNode Id="437514e3-42be-4f7d-bde8-ae5b6f6721e4" Title="Ui Class" Url="html/T_RevitTemplate_Ui.htm">
       <HelpTOCNode Title="Ui Constructor " Url="html/M_RevitTemplate_Ui__ctor.htm" />
       <HelpTOCNode Title="Ui Properties" Url="html/Properties_T_RevitTemplate_Ui.htm" />
-      <HelpTOCNode Id="72ed5574-f569-4ef5-ad56-9db6ffcbb1c7" Title="Ui Methods" Url="html/Methods_T_RevitTemplate_Ui.htm">
+      <HelpTOCNode Id="41a56d34-4e9f-4d18-b9fc-1b40f47d9a56" Title="Ui Methods" Url="html/Methods_T_RevitTemplate_Ui.htm">
         <HelpTOCNode Title="BExternalMethod1_Click Method " Url="html/M_RevitTemplate_Ui_BExternalMethod1_Click.htm" />
+        <HelpTOCNode Title="BExtString_Click Method " Url="html/M_RevitTemplate_Ui_BExtString_Click.htm" />
         <HelpTOCNode Title="BNonExternal1_Click Method " Url="html/M_RevitTemplate_Ui_BNonExternal1_Click.htm" />
         <HelpTOCNode Title="BNonExternal2_Click Method " Url="html/M_RevitTemplate_Ui_BNonExternal2_Click.htm" />
         <HelpTOCNode Title="BNonExternal3_Click Method " Url="html/M_RevitTemplate_Ui_BNonExternal3_Click.htm" />
-        <HelpTOCNode Title="bTest_Click Method " Url="html/M_RevitTemplate_Ui_bTest_Click.htm" />
         <HelpTOCNode Title="InitializeComponent Method " Url="html/M_RevitTemplate_Ui_InitializeComponent.htm" />
         <HelpTOCNode Title="MainWindow_Closed Method " Url="html/M_RevitTemplate_Ui_MainWindow_Closed.htm" />
+        <HelpTOCNode Title="UserAlert Method " Url="html/M_RevitTemplate_Ui_UserAlert.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="Ui Events" Url="html/Events_T_RevitTemplate_Ui.htm" />
-      <HelpTOCNode Id="90cf99a4-a063-4bb5-a1c4-794373cb8a28" Title="Ui Fields" Url="html/Fields_T_RevitTemplate_Ui.htm">
-        <HelpTOCNode Title="_app Field" Url="html/F_RevitTemplate_Ui__app.htm" />
+      <HelpTOCNode Id="f5133b96-1dd7-49be-aec9-e3b3362bc433" Title="Ui Fields" Url="html/Fields_T_RevitTemplate_Ui.htm">
         <HelpTOCNode Title="_contentLoaded Field" Url="html/F_RevitTemplate_Ui__contentLoaded.htm" />
         <HelpTOCNode Title="_doc Field" Url="html/F_RevitTemplate_Ui__doc.htm" />
-        <HelpTOCNode Title="_uiApp Field" Url="html/F_RevitTemplate_Ui__uiApp.htm" />
         <HelpTOCNode Title="_uiDoc Field" Url="html/F_RevitTemplate_Ui__uiDoc.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="9f8817ab-b84f-45cf-a5f6-9df1daef17fe" Title="Util Class" Url="html/T_RevitTemplate_Util.htm">
+      <HelpTOCNode Id="ae8fdeb3-56d9-4294-a993-e5b1d112f2f1" Title="Util Methods" Url="html/Methods_T_RevitTemplate_Util.htm">
+        <HelpTOCNode Title="HandleError Method " Url="html/M_RevitTemplate_Util_HandleError.htm" />
+        <HelpTOCNode Title="LogThreadInfo Method " Url="html/M_RevitTemplate_Util_LogThreadInfo.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
