@@ -1,5 +1,17 @@
 # Revit WPF Template
 
+![GitHub issues](https://img.shields.io/github/issues/mitevpi/revit-wpf-template)
+![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/mitevpi/revit-wpf-template)
+![GitHub contributors](https://img.shields.io/github/contributors/mitevpi/revit-wpf-template)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/mitevpi/revit-wpf-template)
+![GitHub Release Date](https://img.shields.io/github/release-date/mitevpi/revit-wpf-template)
+![GitHub All Releases](https://img.shields.io/github/downloads/mitevpi/revit-wpf-template/total)
+
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mitevpi/revit-wpf-template)
+![GitHub repo size](https://img.shields.io/github/repo-size/mitevpi/revit-wpf-template)
+![GitHub](https://img.shields.io/github/license/mitevpi/revit-wpf-template)
+
 WPF Template for Revit Add-Ins including wrapped external methods for execution in a "Valid Revit API Context"
 
 ![Window A](assets/window1.png)

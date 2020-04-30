@@ -66,7 +66,7 @@ namespace RevitTemplate
                 // start a transaction within the valid Revit API context
                 t.Start("Rename Sheets");
 
-                // loop over the collection of sheets
+                // loop over the collection of sheets using LINQ syntax
                 foreach (string renameMessage in from sheet in sheets
                     let renamed = sheet.LookupParameter("Sheet Name")?.Set("TEST")
                     select $"Renamed: {sheet.Title}, Status: {renamed}")

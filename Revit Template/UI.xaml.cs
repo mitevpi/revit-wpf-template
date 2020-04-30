@@ -61,31 +61,30 @@ namespace RevitTemplate
         private void UserAlert()
         {
             //TaskDialog.Show("Non-External Method", "Non-External Method Executed Successfully");
-            //MessageBox.Show("Non-External Method Executed Successfully", "Non-External Method");
+            MessageBox.Show("Non-External Method Executed Successfully", "Non-External Method");
 
-            Dispatcher.Invoke(() =>
-            {
-                TaskDialog mainDialog = new TaskDialog("Hello, Revit!")
-                {
-                    MainInstruction = "Hello, Revit!",
-                    MainContent = "This sample shows how to use a Revit task dialog to communicate with the user."
-                                  + "The command links below open additional task dialogs with more information.",
-                    CommonButtons = TaskDialogCommonButtons.Ok,
-                    FooterText = "<a href=\"http://usa.autodesk.com/adsk/servlet/index?siteID=123112&id=2484975 \">"
-                                 + "Click here for the Revit API Developer Center</a>"
-                };
+            //Dispatcher.Invoke(() =>
+            //{
+            //    TaskDialog mainDialog = new TaskDialog("Non-External Method")
+            //    {
+            //        MainInstruction = "Hello, Revit!",
+            //        MainContent = "Non-External Method Executed Successfully",
+            //        CommonButtons = TaskDialogCommonButtons.Ok,
+            //        FooterText = "<a href=\"http://usa.autodesk.com/adsk/servlet/index?siteID=123112&id=2484975 \">"
+            //                     + "Click here for the Revit API Developer Center</a>"
+            //    };
 
 
-                TaskDialogResult tResult = mainDialog.Show();
-                Debug.WriteLine(tResult.ToString());
-            });
+            //    TaskDialogResult tResult = mainDialog.Show();
+            //    Debug.WriteLine(tResult.ToString());
+            //});
         }
 
         private void BNonExternal3_Click(object sender, RoutedEventArgs e)
         {
             // the sheet takeoff + delete method won't work here because it's not in a valid Revit api context
             // and we need to do a transaction
-            // Methods.SheetTakeoff(this, _doc); <- WON'T WORK HERE
+            // Methods.SheetRename(this, _doc); <- WON'T WORK HERE
             UserAlert();
         }
 
