@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpKI>
   <HelpKINode Title="BExternalMethod1_Click method" Url="html/M_RevitTemplate_Ui_BExternalMethod1_Click.htm" />
+  <HelpKINode Title="BExtString_Click method" Url="html/M_RevitTemplate_Ui_BExtString_Click.htm" />
   <HelpKINode Title="BNonExternal1_Click method" Url="html/M_RevitTemplate_Ui_BNonExternal1_Click.htm" />
   <HelpKINode Title="BNonExternal2_Click method" Url="html/M_RevitTemplate_Ui_BNonExternal2_Click.htm" />
   <HelpKINode Title="BNonExternal3_Click method" Url="html/M_RevitTemplate_Ui_BNonExternal3_Click.htm" />
-  <HelpKINode Title="bTest_Click method" Url="html/M_RevitTemplate_Ui_bTest_Click.htm" />
   <HelpKINode Title="EntryCommand class">
     <HelpKINode Title="EntryCommand Class" Url="html/T_RevitTemplate_EntryCommand.htm" />
     <HelpKINode Title="constructor" Url="html/M_RevitTemplate_EntryCommand__ctor.htm" />
@@ -12,6 +12,13 @@
   </HelpKINode>
   <HelpKINode Title="EntryCommand.EntryCommand constructor" Url="html/M_RevitTemplate_EntryCommand__ctor.htm" />
   <HelpKINode Title="EntryCommand.Execute method" Url="html/M_RevitTemplate_EntryCommand_Execute.htm" />
+  <HelpKINode Title="EntryCommandSeparateThread class">
+    <HelpKINode Title="EntryCommandSeparateThread Class" Url="html/T_RevitTemplate_EntryCommandSeparateThread.htm" />
+    <HelpKINode Title="constructor" Url="html/M_RevitTemplate_EntryCommandSeparateThread__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_RevitTemplate_EntryCommandSeparateThread.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EntryCommandSeparateThread.EntryCommandSeparateThread constructor" Url="html/M_RevitTemplate_EntryCommandSeparateThread__ctor.htm" />
+  <HelpKINode Title="EntryCommandSeparateThread.Execute method" Url="html/M_RevitTemplate_EntryCommandSeparateThread_Execute.htm" />
   <HelpKINode Title="EventHandlerWithStringArg class">
     <HelpKINode Title="EventHandlerWithStringArg Class" Url="html/T_RevitTemplate_EventHandlerWithStringArg.htm" />
     <HelpKINode Title="constructor" Url="html/M_RevitTemplate_EventHandlerWithStringArg__ctor.htm" />
@@ -30,12 +37,15 @@
   <HelpKINode Title="EventHandlerWithWpfArg.Execute method" Url="html/Overload_RevitTemplate_EventHandlerWithWpfArg_Execute.htm" />
   <HelpKINode Title="Execute method">
     <HelpKINode Title="EntryCommand.Execute Method " Url="html/M_RevitTemplate_EntryCommand_Execute.htm" />
+    <HelpKINode Title="EntryCommandSeparateThread.Execute Method " Url="html/M_RevitTemplate_EntryCommandSeparateThread_Execute.htm" />
     <HelpKINode Title="EventHandlerWithStringArg.Execute Method " Url="html/Overload_RevitTemplate_EventHandlerWithStringArg_Execute.htm" />
     <HelpKINode Title="EventHandlerWithWpfArg.Execute Method " Url="html/Overload_RevitTemplate_EventHandlerWithWpfArg_Execute.htm" />
     <HelpKINode Title="RevitEventWrapper(TType).Execute Method " Url="html/Overload_RevitTemplate_RevitEventWrapper_1_Execute.htm" />
   </HelpKINode>
   <HelpKINode Title="GetName method" Url="html/M_RevitTemplate_RevitEventWrapper_1_GetName.htm" />
+  <HelpKINode Title="HandleError method" Url="html/M_RevitTemplate_Util_HandleError.htm" />
   <HelpKINode Title="InitializeComponent method" Url="html/M_RevitTemplate_Ui_InitializeComponent.htm" />
+  <HelpKINode Title="LogThreadInfo method" Url="html/M_RevitTemplate_Util_LogThreadInfo.htm" />
   <HelpKINode Title="MainWindow_Closed method" Url="html/M_RevitTemplate_Ui_MainWindow_Closed.htm" />
   <HelpKINode Title="Raise method" Url="html/M_RevitTemplate_RevitEventWrapper_1_Raise.htm" />
   <HelpKINode Title="RevitEventWrapper(Of TType) class">
@@ -66,11 +76,13 @@
   <HelpKINode Title="RevitEventWrapper&lt;TType&gt;._savedArgs field" Url="html/F_RevitTemplate_RevitEventWrapper_1__savedArgs.htm" />
   <HelpKINode Title="RevitTemplate namespace" Url="html/N_RevitTemplate.htm" />
   <HelpKINode Title="RevitTemplate.EntryCommand class" Url="html/T_RevitTemplate_EntryCommand.htm" />
+  <HelpKINode Title="RevitTemplate.EntryCommandSeparateThread class" Url="html/T_RevitTemplate_EntryCommandSeparateThread.htm" />
   <HelpKINode Title="RevitTemplate.EventHandlerWithStringArg class" Url="html/T_RevitTemplate_EventHandlerWithStringArg.htm" />
   <HelpKINode Title="RevitTemplate.EventHandlerWithWpfArg class" Url="html/T_RevitTemplate_EventHandlerWithWpfArg.htm" />
   <HelpKINode Title="RevitTemplate.RevitEventWrapper(Of TType) class" Url="html/T_RevitTemplate_RevitEventWrapper_1.htm" />
   <HelpKINode Title="RevitTemplate.RevitEventWrapper&lt;TType&gt; class" Url="html/T_RevitTemplate_RevitEventWrapper_1.htm" />
   <HelpKINode Title="RevitTemplate.Ui class" Url="html/T_RevitTemplate_Ui.htm" />
+  <HelpKINode Title="RevitTemplate.Util class" Url="html/T_RevitTemplate_Util.htm" />
   <HelpKINode Title="Ui class">
     <HelpKINode Title="Ui Class" Url="html/T_RevitTemplate_Ui.htm" />
     <HelpKINode Title="constructor" Url="html/M_RevitTemplate_Ui__ctor.htm" />
@@ -80,24 +92,28 @@
     <HelpKINode Title="properties" Url="html/Properties_T_RevitTemplate_Ui.htm" />
   </HelpKINode>
   <HelpKINode Title="Ui.BExternalMethod1_Click method" Url="html/M_RevitTemplate_Ui_BExternalMethod1_Click.htm" />
+  <HelpKINode Title="Ui.BExtString_Click method" Url="html/M_RevitTemplate_Ui_BExtString_Click.htm" />
   <HelpKINode Title="Ui.BNonExternal1_Click method" Url="html/M_RevitTemplate_Ui_BNonExternal1_Click.htm" />
   <HelpKINode Title="Ui.BNonExternal2_Click method" Url="html/M_RevitTemplate_Ui_BNonExternal2_Click.htm" />
   <HelpKINode Title="Ui.BNonExternal3_Click method" Url="html/M_RevitTemplate_Ui_BNonExternal3_Click.htm" />
-  <HelpKINode Title="Ui.bTest_Click method" Url="html/M_RevitTemplate_Ui_bTest_Click.htm" />
   <HelpKINode Title="Ui.InitializeComponent method" Url="html/M_RevitTemplate_Ui_InitializeComponent.htm" />
   <HelpKINode Title="Ui.MainWindow_Closed method" Url="html/M_RevitTemplate_Ui_MainWindow_Closed.htm" />
   <HelpKINode Title="Ui.Ui constructor" Url="html/M_RevitTemplate_Ui__ctor.htm" />
-  <HelpKINode Title="Ui._app field" Url="html/F_RevitTemplate_Ui__app.htm" />
+  <HelpKINode Title="Ui.UserAlert method" Url="html/M_RevitTemplate_Ui_UserAlert.htm" />
   <HelpKINode Title="Ui._contentLoaded field" Url="html/F_RevitTemplate_Ui__contentLoaded.htm" />
   <HelpKINode Title="Ui._doc field" Url="html/F_RevitTemplate_Ui__doc.htm" />
-  <HelpKINode Title="Ui._uiApp field" Url="html/F_RevitTemplate_Ui__uiApp.htm" />
   <HelpKINode Title="Ui._uiDoc field" Url="html/F_RevitTemplate_Ui__uiDoc.htm" />
-  <HelpKINode Title="_app field" Url="html/F_RevitTemplate_Ui__app.htm" />
+  <HelpKINode Title="UserAlert method" Url="html/M_RevitTemplate_Ui_UserAlert.htm" />
+  <HelpKINode Title="Util class">
+    <HelpKINode Title="Util Class" Url="html/T_RevitTemplate_Util.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_RevitTemplate_Util.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Util.HandleError method" Url="html/M_RevitTemplate_Util_HandleError.htm" />
+  <HelpKINode Title="Util.LogThreadInfo method" Url="html/M_RevitTemplate_Util_LogThreadInfo.htm" />
   <HelpKINode Title="_contentLoaded field" Url="html/F_RevitTemplate_Ui__contentLoaded.htm" />
   <HelpKINode Title="_doc field" Url="html/F_RevitTemplate_Ui__doc.htm" />
   <HelpKINode Title="_lock field" Url="html/F_RevitTemplate_RevitEventWrapper_1__lock.htm" />
   <HelpKINode Title="_revitEvent field" Url="html/F_RevitTemplate_RevitEventWrapper_1__revitEvent.htm" />
   <HelpKINode Title="_savedArgs field" Url="html/F_RevitTemplate_RevitEventWrapper_1__savedArgs.htm" />
-  <HelpKINode Title="_uiApp field" Url="html/F_RevitTemplate_Ui__uiApp.htm" />
   <HelpKINode Title="_uiDoc field" Url="html/F_RevitTemplate_Ui__uiDoc.htm" />
 </HelpKI>
