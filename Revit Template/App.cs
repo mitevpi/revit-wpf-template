@@ -48,7 +48,7 @@ namespace RevitTemplate
 
             PushButton button2 =
                 panel.AddItem(
-                        new PushButtonData("WPF Template Multi-Thread", "WPF Template Multi-Thread", thisAssemblyPath,
+                        new PushButtonData("WPF Template\nMulti-Thread", "WPF Template\nMulti-Thread", thisAssemblyPath,
                             "RevitTemplate.EntryCommandSeparateThread")) as
                     PushButton;
 
@@ -82,16 +82,14 @@ namespace RevitTemplate
         public void ShowForm(UIApplication uiapp)
         {
             // If we do not have a dialog yet, create and show it
-            if (_mMyForm == null || _mMyForm != null) // || m_MyForm.IsDisposed
-            {
-                //EXTERNAL EVENTS WITH ARGUMENTS
-                EventHandlerWithStringArg evString = new EventHandlerWithStringArg();
-                EventHandlerWithWpfArg evWpf = new EventHandlerWithWpfArg();
+            if (_mMyForm != null && _mMyForm == null) return;
+            //EXTERNAL EVENTS WITH ARGUMENTS
+            EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
+            EventHandlerWithWpfArg evWpf = new EventHandlerWithWpfArg();
 
-                // The dialog becomes the owner responsible for disposing the objects given to it.
-                _mMyForm = new Ui(uiapp, evString, evWpf);
-                _mMyForm.Show();
-            }
+            // The dialog becomes the owner responsible for disposing the objects given to it.
+            _mMyForm = new Ui(uiapp, evStr, evWpf);
+            _mMyForm.Show();
         }
 
         /// <summary>
@@ -103,28 +101,26 @@ namespace RevitTemplate
         public void ShowFormSeparateThread(UIApplication uiapp)
         {
             // If we do not have a thread started or has been terminated start a new one
-            if (_UiThread is null || !_UiThread.IsAlive)
+            if (!(_UiThread is null) && _UiThread.IsAlive) return;
+            //EXTERNAL EVENTS WITH ARGUMENTS
+            EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
+            EventHandlerWithWpfArg evWpf = new EventHandlerWithWpfArg();
+
+            _UiThread = new Thread(() =>
             {
-                //EXTERNAL EVENTS WITH ARGUMENTS
-                EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
-                EventHandlerWithWpfArg eDatabaseStore = new EventHandlerWithWpfArg();
+                SynchronizationContext.SetSynchronizationContext(
+                    new DispatcherSynchronizationContext(
+                        Dispatcher.CurrentDispatcher));
+                // The dialog becomes the owner responsible for disposing the objects given to it.
+                _mMyForm = new Ui(uiapp, evStr, evWpf);
+                _mMyForm.Closed += (s, e) => Dispatcher.CurrentDispatcher.InvokeShutdown();
+                _mMyForm.Show();
+                Dispatcher.Run();
+            });
 
-                _UiThread = new Thread(() =>
-                {
-                    SynchronizationContext.SetSynchronizationContext(
-                        new DispatcherSynchronizationContext(
-                            Dispatcher.CurrentDispatcher));
-                    // The dialog becomes the owner responsible for disposing the objects given to it.
-                    _mMyForm = new Ui(uiapp, evStr, eDatabaseStore);
-                    _mMyForm.Closed += (s, e) => Dispatcher.CurrentDispatcher.InvokeShutdown();
-                    _mMyForm.Show();
-                    Dispatcher.Run();
-                });
-
-                _UiThread.SetApartmentState(ApartmentState.STA);
-                _UiThread.IsBackground = true;
-                _UiThread.Start();
-            }
+            _UiThread.SetApartmentState(ApartmentState.STA);
+            _UiThread.IsBackground = true;
+            _UiThread.Start();
         }
 
         #region Idling & Closing
