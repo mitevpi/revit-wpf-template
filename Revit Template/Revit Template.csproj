@@ -61,10 +61,6 @@
     <ApplicationManifest>RevitTemplate.addin</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdWindows, Version=2015.11.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Revit-2017.1.1-x64.Base.2.0.0\lib\net452\AdWindows.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="Microsoft.CSharp" />
@@ -106,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="EntryCommandSeparateThread.cs" />
     <Compile Include="EntryCommand.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="MethodsWrapped.cs" />
@@ -126,6 +123,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EntryCommandSeparateThread.resx">
+      <DependentUpon>EntryCommandSeparateThread.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EntryCommandSeparateThread.ru.resx">
+      <DependentUpon>EntryCommandSeparateThread.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EntryCommand.resx">
       <DependentUpon>EntryCommand.cs</DependentUpon>
     </EmbeddedResource>
