@@ -123,20 +123,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EntryCommandSeparateThread.resx">
-      <DependentUpon>EntryCommandSeparateThread.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EntryCommandSeparateThread.ru.resx">
-      <DependentUpon>EntryCommandSeparateThread.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EntryCommand.resx">
-      <DependentUpon>EntryCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EntryCommand.ru.resx">
-      <DependentUpon>EntryCommand.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="License.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

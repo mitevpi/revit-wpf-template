@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Windows.Media.Imaging;
-using Autodesk.Revit.UI;
-using System.Windows.Threading;
 using System.Threading;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using Autodesk.Revit.UI;
+using Autodesk.Revit.UI.Events;
 
 namespace RevitTemplate
 {
@@ -15,7 +16,7 @@ namespace RevitTemplate
     class App : IExternalApplication
     {
         // class instance
-        public static App ThisApp = null;
+        public static App ThisApp;
 
         // ModelessForm instance
         private Ui _mMyForm;
@@ -33,7 +34,7 @@ namespace RevitTemplate
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
             PushButton button =
                 panel.AddItem(
-                        new PushButtonData("Revit Template", "Revit Template", thisAssemblyPath,
+                        new PushButtonData("WPF Template", "WPF Template", thisAssemblyPath,
                             "RevitTemplate.EntryCommand")) as
                     PushButton;
 
@@ -47,7 +48,7 @@ namespace RevitTemplate
 
             PushButton button2 =
                 panel.AddItem(
-                        new PushButtonData("Revit Template 2", "Revit Template 2", thisAssemblyPath,
+                        new PushButtonData("WPF Template Multi-Thread", "WPF Template Multi-Thread", thisAssemblyPath,
                             "RevitTemplate.EntryCommandSeparateThread")) as
                     PushButton;
 
@@ -81,7 +82,7 @@ namespace RevitTemplate
         public void ShowForm(UIApplication uiapp)
         {
             // If we do not have a dialog yet, create and show it
-            if ( _mMyForm == null || _mMyForm != null ) // || m_MyForm.IsDisposed
+            if (_mMyForm == null || _mMyForm != null) // || m_MyForm.IsDisposed
             {
                 //EXTERNAL EVENTS WITH ARGUMENTS
                 EventHandlerWithStringArg evString = new EventHandlerWithStringArg();
@@ -102,14 +103,13 @@ namespace RevitTemplate
         public void ShowFormSeparateThread(UIApplication uiapp)
         {
             // If we do not have a thread started or has been terminated start a new one
-            if ( _UiThread is null || !_UiThread.IsAlive )
+            if (_UiThread is null || !_UiThread.IsAlive)
             {
-
                 //EXTERNAL EVENTS WITH ARGUMENTS
                 EventHandlerWithStringArg evStr = new EventHandlerWithStringArg();
                 EventHandlerWithWpfArg eDatabaseStore = new EventHandlerWithWpfArg();
 
-                _UiThread = new Thread(new ThreadStart(() =>
+                _UiThread = new Thread(() =>
                 {
                     SynchronizationContext.SetSynchronizationContext(
                         new DispatcherSynchronizationContext(
@@ -119,7 +119,7 @@ namespace RevitTemplate
                     _mMyForm.Closed += (s, e) => Dispatcher.CurrentDispatcher.InvokeShutdown();
                     _mMyForm.Show();
                     Dispatcher.Run();
-                }));
+                });
 
                 _UiThread.SetApartmentState(ApartmentState.STA);
                 _UiThread.IsBackground = true;
@@ -129,18 +129,17 @@ namespace RevitTemplate
 
         #region Idling & Closing
 
-
         /// <summary>
         /// What to do when the application is idling. (Ideally nothing)
         /// </summary>
-        void a_Idling(object sender, Autodesk.Revit.UI.Events.IdlingEventArgs e)
+        void a_Idling(object sender, IdlingEventArgs e)
         {
         }
 
         /// <summary>
         /// What to do when the application is closing.)
         /// </summary>
-        void a_ApplicationClosing(object sender, Autodesk.Revit.UI.Events.ApplicationClosingEventArgs e)
+        void a_ApplicationClosing(object sender, ApplicationClosingEventArgs e)
         {
         }
 
@@ -173,9 +172,9 @@ namespace RevitTemplate
 
             // Search existing tab for your panel.
             List<RibbonPanel> panels = a.GetRibbonPanels(tab);
-            foreach ( RibbonPanel p in panels )
+            foreach (RibbonPanel p in panels)
             {
-                if ( p.Name == "Develop" )
+                if (p.Name == "Develop")
                 {
                     ribbonPanel = p;
                 }
