@@ -13,6 +13,22 @@ namespace RevitTemplate
     internal class Methods
     {
         /// <summary>
+        /// Method for collecting sheets as an asynchronous operation on another thread.
+        /// </summary>
+        /// <param name="doc">The Revit Document to collect sheets from.</param>
+        /// <returns>A list of collected sheets, once the Task is resolved.</returns>
+        private static async Task<List<ViewSheet>> GetSheets(Document doc)
+        {
+            return await Task.Run(() =>
+            {
+                Util.LogThreadInfo("Get Sheets Method");
+                return new FilteredElementCollector(doc)
+                    .OfClass(typeof(ViewSheet))
+                    .Select(p => (ViewSheet) p).ToList();
+            });
+        }
+
+        /// <summary>
         /// Rename all the sheets in the project. This opens a transaction, and it MUST be executed
         /// in a "Valid Revit API Context", otherwise the add-in will crash. Because of this, we must
         /// wrap it in a ExternalEventHandler, as we do in the App.cs file in this template.
@@ -22,14 +38,20 @@ namespace RevitTemplate
         /// <param name="doc">The Revit Document to rename sheets in.</param>
         public static void SheetRename(Ui ui, Document doc)
         {
-            ICollection<ViewSheet> sheets = null;
-            sheets = new FilteredElementCollector(doc)
+            Util.LogThreadInfo("Sheet Rename Method");
+
+            // get sheets - note that this may be replaced with the Async Task method above,
+            // however that will only work if we want to only PULL data from the sheets,
+            // and executing a transaction like below from an async collection, will crash the app
+            List<ViewSheet> sheets = new FilteredElementCollector(doc)
                 .OfClass(typeof(ViewSheet))
                 .Select(p => (ViewSheet) p).ToList();
 
-            // get sheets, report results - push the task off to another thread
+            // report results - push the task off to another thread
             Task.Run(() =>
             {
+                Util.LogThreadInfo("Sheet Rename Show Results");
+
                 // report the count
                 string message = $"There are {sheets.Count} Sheets in the project";
                 ui.Dispatcher.Invoke(() =>
@@ -39,15 +61,16 @@ namespace RevitTemplate
             // rename all the sheets, but first open a transaction
             using (Transaction t = new Transaction(doc, "Rename Sheets"))
             {
+                Util.LogThreadInfo("Sheet Rename Transaction");
+
                 // start a transaction within the valid Revit API context
                 t.Start("Rename Sheets");
 
                 // loop over the collection of sheets
-                foreach (ViewSheet sheet in sheets)
+                foreach (string renameMessage in from sheet in sheets
+                    let renamed = sheet.LookupParameter("Sheet Name")?.Set("TEST")
+                    select $"Renamed: {sheet.Title}, Status: {renamed}")
                 {
-                    // rename the sheets
-                    bool? renamed = sheet.LookupParameter("Sheet Name")?.Set("TEST");
-                    string renameMessage = $"Renamed: {sheet.Title}, Status: {renamed}";
                     ui.Dispatcher.Invoke(() =>
                         ui.TbDebug.Text += "\n" + (DateTime.Now).ToLongTimeString() + "\t" + renameMessage);
                 }
@@ -83,6 +106,8 @@ namespace RevitTemplate
         {
             Task.Run(() =>
             {
+                Util.LogThreadInfo("Wall Count Method");
+
                 // get all walls in the document
                 ICollection<Wall> walls = new FilteredElementCollector(doc)
                     .OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElementType()

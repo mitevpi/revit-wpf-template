@@ -63,22 +63,22 @@ namespace RevitTemplate
             //TaskDialog.Show("Non-External Method", "Non-External Method Executed Successfully");
             //MessageBox.Show("Non-External Method Executed Successfully", "Non-External Method");
 
-            TaskDialog mainDialog = new TaskDialog("Hello, Revit!")
+            Dispatcher.Invoke(() =>
             {
-                MainInstruction = "Hello, Revit!",
-                MainContent = "This sample shows how to use a Revit task dialog to communicate with the user."
-                              + "The command links below open additional task dialogs with more information.",
-                CommonButtons = TaskDialogCommonButtons.Close,
-                DefaultButton = TaskDialogResult.Close,
-                FooterText = "<a href=\"http://usa.autodesk.com/adsk/servlet/index?siteID=123112&id=2484975 \">"
-                             + "Click here for the Revit API Developer Center</a>"
-            };
+                TaskDialog mainDialog = new TaskDialog("Hello, Revit!")
+                {
+                    MainInstruction = "Hello, Revit!",
+                    MainContent = "This sample shows how to use a Revit task dialog to communicate with the user."
+                                  + "The command links below open additional task dialogs with more information.",
+                    CommonButtons = TaskDialogCommonButtons.Ok,
+                    FooterText = "<a href=\"http://usa.autodesk.com/adsk/servlet/index?siteID=123112&id=2484975 \">"
+                                 + "Click here for the Revit API Developer Center</a>"
+                };
 
 
-            // Set footer text. Footer text is usually used to link to the help document.
-
-            TaskDialogResult tResult = mainDialog.Show();
-            Debug.WriteLine(tResult.ToString());
+                TaskDialogResult tResult = mainDialog.Show();
+                Debug.WriteLine(tResult.ToString());
+            });
         }
 
         private void BNonExternal3_Click(object sender, RoutedEventArgs e)
@@ -86,22 +86,19 @@ namespace RevitTemplate
             // the sheet takeoff + delete method won't work here because it's not in a valid Revit api context
             // and we need to do a transaction
             // Methods.SheetTakeoff(this, _doc); <- WON'T WORK HERE
-            //Dispatcher.Invoke(UserAlert);
-            Task.Run(UserAlert);
+            UserAlert();
         }
 
         private void BNonExternal1_Click(object sender, RoutedEventArgs e)
         {
             Methods.DocumentInfo(this, _doc);
-            //Dispatcher.Invoke(UserAlert);
-            Task.Run(UserAlert);
+            UserAlert();
         }
 
         private void BNonExternal2_Click(object sender, RoutedEventArgs e)
         {
             Methods.WallInfo(this, _doc);
-            //Dispatcher.Invoke(UserAlert);
-            Task.Run(UserAlert);
+            UserAlert();
         }
 
         #endregion
